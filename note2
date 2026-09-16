@@ -1,0 +1,869 @@
+🎌 PROJET — JEU DU PENDU
+Direction artistique
+
+Style : manga / illustration japonaise sombre
+Univers : Japon, nuit, lune rouge, temples, montagnes, érables rouges
+Personnage : notre personnage original en tenue noire
+Progression : la potence puis le personnage apparaissent progressivement.
+
+Règles
+
+Mode Facile : 11 erreurs
+
+0  Paysage
+1  Base
+2  Poteau
+3  Poutre
+4  Renfort
+5  Corde
+6  Tête
+7  Buste
+8  Bras droit
+9  Bras gauche
+10 Jambe droite
+11 Jambe gauche → GAME OVER
+
+Mode Difficile : 6 erreurs
+
+0  Potence complète
+1  Tête
+2  Buste
+3  Bras droit
+4  Bras gauche
+5  Jambe droite
+6  Jambe gauche → GAME OVER
+🗂️ 1. STRUCTURE DU PROJET
+
+On part sur quelque chose de propre :
+
+jeu-du-pendu/
+│
+├── index.html
+├── game.html
+├── endgame.html
+│
+├── css/
+│   ├── style.css
+│   ├── home.css
+│   ├── game.css
+│   └── endgame.css
+│
+├── js/
+│   ├── data.js
+│   ├── home.js
+│   ├── game.js
+│   └── endgame.js
+│
+├── assets/
+│   ├── images/
+│   │   ├── pendu-0.png
+│   │   ├── pendu-1.png
+│   │   ├── ...
+│   │   └── pendu-11.png
+│   │
+│   └── audio/
+│
+└── README.md
+
+On pourra évidemment adapter l'organisation si nécessaire pendant le développement.
+
+🏠 2. PAGE D'ACCUEIL — index.html
+
+C'est la première chose que voit le joueur.
+
+2.1 Identité du jeu
+
+On aura :
+
+Nom du jeu
+
+LE DESTIN DU GUERRIER
+Le jeu du pendu
+
+ou le nom que nous aurons définitivement choisi.
+
+Avec :
+
+arrière-plan japonais ;
+lune rouge ;
+ambiance manga ;
+logo/titre ;
+message de bienvenue.
+👥 3. CHOIX DU NOMBRE DE JOUEURS
+
+Le joueur choisit :
+
+Mode 1
+
+👤 1 Joueur
+
+Mode 2
+
+👥 2 Joueurs
+
+Mode 3
+
+👥 3 Joueurs
+
+Mode 4
+
+⚔️ 2 Équipes de 2
+
+Ce choix est sauvegardé pour la partie.
+
+💀 4. CHOIX DE LA DIFFICULTÉ
+
+Deux choix.
+
+🟢 FACILE
+
+11 coups
+
+La potence se construit progressivement.
+
+Paysage
+ ↓
+Potence
+ ↓
+Corde
+ ↓
+Personnage
+ ↓
+GAME OVER
+🔴 DIFFICILE
+
+6 coups
+
+La potence est déjà complète.
+
+Seul le personnage apparaît progressivement.
+
+📝 5. MOTS PERSONNALISÉS
+
+Le cahier des charges demande que le joueur puisse ajouter un mot.
+
+On aura donc :
+
+Ajouter un mot secret
+[_____________________]
+
+[ + Ajouter ce mot ]
+
+Le mot sera ajouté à la liste disponible pour la partie.
+
+Important
+
+On n'a pas besoin d'une véritable base de données serveur pour ce projet.
+
+On peut gérer cette « base de données de la partie » avec JavaScript + localStorage.
+
+▶️ 6. LANCER LA PARTIE
+
+Bouton principal :
+
+LANCER LA PARTIE
+
+Au clic, JavaScript récupère :
+
+Nombre de joueurs
+Difficulté
+Mots personnalisés
+
+et sauvegarde les paramètres.
+
+Puis :
+
+index.html
+      ↓
+game.html
+🎮 7. PAGE DE JEU — game.html
+
+C'est notre arène principale.
+
+On va avoir plusieurs zones.
+
+En haut
+LE DESTIN DU GUERRIER
+
+TOUR DU JOUEUR 1
+
+COUPS RESTANTS : 11
+
+Le compteur dépendra évidemment du mode.
+
+🖼️ 8. ZONE DU PENDU
+
+Notre image sera affichée.
+
+Exemple au lancement en facile :
+
+pendu-0.png
+
+Après une erreur :
+
+pendu-1.png
+
+etc.
+
+JavaScript changera automatiquement l'image.
+
+Facile
+erreurs = 0 → pendu-0.png
+erreurs = 1 → pendu-1.png
+...
+erreurs = 11 → pendu-11.png
+Difficile
+départ → pendu-5.png
+1 → pendu-6.png
+2 → pendu-7.png
+3 → pendu-8.png
+4 → pendu-9.png
+5 → pendu-10.png
+6 → pendu-11.png
+🔤 9. MOT SECRET
+
+Le jeu choisit aléatoirement un mot.
+
+Exemple :
+
+_ _ _ _ _ _ _
+
+Si le joueur trouve A :
+
+_ A _ _ _ A _
+
+Toutes les occurrences de la lettre doivent apparaître.
+
+🎲 10. SÉLECTION ALÉATOIRE DU MOT
+
+On aura une liste dans data.js.
+
+Par exemple :
+
+const words = [
+    "SAMOURAI",
+    "NINJA",
+    "KATANA",
+    "TEMPLE",
+    "DRAGON",
+    "SAKURA",
+    "TORII",
+    "SHOGUN",
+    "RONIN"
+];
+
+À chaque nouvelle manche :
+
+liste de mots
+      ↓
+tirage aléatoire
+      ↓
+mot secret
+
+Le mot change donc à chaque partie.
+
+⌨️ 11. CLAVIER VIRTUEL
+
+Les 26 lettres :
+
+A B C D E F G H I J K L M
+N O P Q R S T U V W X Y Z
+
+Chaque lettre sera un bouton.
+
+Quand une lettre est utilisée :
+
+A
+↓
+désactivée
+
+Elle ne pourra plus être utilisée.
+
+⌨️ 12. CLAVIER PHYSIQUE
+
+Le cahier des charges laisse le choix, mais nous allons faire les deux :
+
+Souris
+
+Cliquer sur :
+
+A
+
+Clavier
+
+Appuyer directement sur :
+
+A
+
+Ça rendra le jeu beaucoup plus agréable.
+
+❌ 13. LETTRE INCORRECTE
+
+Si le joueur propose une lettre qui n'est pas dans le mot :
+
+erreurs++
+
+Puis :
+
+image suivante
+
+Et :
+
+coups restants--
+
+Exemple :
+
+COUPS RESTANTS : 8
+
+→ mauvaise lettre
+
+COUPS RESTANTS : 7
+✅ 14. LETTRE CORRECTE
+
+Si la lettre existe :
+
+aucune vie perdue
+
+Toutes ses occurrences apparaissent.
+
+Puis le joueur continue.
+
+🏆 15. DÉTECTION DE VICTOIRE
+
+Après chaque bonne lettre, JavaScript vérifie :
+
+Est-ce que toutes les lettres du mot ont été trouvées ?
+
+Si oui :
+
+VICTOIRE
+
+et on passe à la fin de partie.
+
+📝 16. PROPOSITION DU MOT ENTIER
+
+Le joueur pourra à tout moment tenter directement le mot.
+
+Proposer le mot
+
+[________________]
+
+[ PROPOSER ]
+Bonne réponse
+SAMOURAI
+
+si le mot est bien SAMOURAI :
+
+→ Victoire immédiate
+
+Mauvaise réponse
+DRAGON
+
+alors que le mot est SAMOURAI :
+
+→ une erreur
+
+→ image suivante
+
+→ coup perdu.
+
+👥 17. SYSTÈME DE TOURS
+
+Une fois le mode 1 joueur fonctionnel, on ajoutera le multijoueur.
+
+2 joueurs
+Joueur 1
+   ↓
+Joueur 2
+   ↓
+Joueur 1
+   ↓
+Joueur 2
+3 joueurs
+Joueur 1
+   ↓
+Joueur 2
+   ↓
+Joueur 3
+   ↓
+Joueur 1
+2 équipes de 2
+Équipe A
+   ↓
+Équipe B
+   ↓
+Équipe A
+   ↓
+Équipe B
+
+L'interface indiquera toujours clairement :
+
+Tour du Joueur 2
+
+ou
+
+Tour de l'Équipe B
+
+🔄 18. GESTION DU TOUR
+
+Il faudra décider d'une règle importante :
+
+Une bonne lettre fait-elle rejouer ou passe-t-on au joueur suivant ?
+
+Le cahier des charges dit simplement :
+
+« le joueur passe à la manche d'après »
+
+Pour rester simple et parfaitement compréhensible, je propose :
+
+chaque tentative = un tour, qu'elle soit bonne ou mauvaise.
+
+Donc :
+
+Joueur 1 → lettre
+↓
+résultat
+↓
+Joueur 2
+
+Cela rend le multijoueur beaucoup plus clair.
+
+💀 19. GAME OVER
+
+Lorsque le compteur atteint la limite :
+
+Facile
+11 erreurs
+Difficile
+6 erreurs
+
+On affiche :
+
+pendu-11.png
+
+Notre image finale avec :
+
+GAME OVER
+
+Puis on passe à la page de fin.
+
+🏆 20. PAGE DE FIN — endgame.html
+
+Deux situations.
+
+Victoire
+BRAVO !
+
+Joueur 2 a trouvé le mot :
+
+SAMOURAI
+Défaite
+GAME OVER
+
+Le pendu est complet.
+
+Le mot secret était :
+
+SAMOURAI
+🔄 21. BOUTON « REJOUER »
+
+Le bouton :
+
+REJOUER
+
+doit conserver :
+
+✓ nombre de joueurs
+✓ difficulté
+✓ configuration
+✓ mots personnalisés
+
+Mais sélectionner :
+
+un nouveau mot aléatoire.
+
+Donc :
+
+endgame.html
+      ↓
+REJOUER
+      ↓
+nouveau mot
+      ↓
+game.html
+🏠 22. BOUTON « MENU PRINCIPAL »
+
+Le bouton :
+
+MENU PRINCIPAL
+
+fait :
+
+endgame.html
+      ↓
+index.html
+
+Le joueur peut alors modifier ses paramètres.
+
+🚪 23. ABANDONNER
+
+Sur la page de jeu :
+
+Abandonner / Retour au menu
+
+Retour vers index.html.
+
+💾 24. LOCALSTORAGE
+
+On va utiliser localStorage pour conserver les informations nécessaires entre les pages.
+
+Par exemple :
+
+gameSettings
+
+pour :
+
+players
+difficulty
+customWords
+
+Et :
+
+currentGame
+
+pour :
+
+secretWord
+errors
+usedLetters
+currentPlayer
+
+On définira précisément la structure quand on écrira JavaScript.
+
+🎨 25. DESIGN
+
+Une fois la mécanique fonctionnelle, on construira toute l'identité visuelle.
+
+Palette
+
+Principalement :
+
+noir ;
+gris très sombre ;
+rouge ;
+blanc ;
+touches orangées pour les lumières.
+Éléments
+lune rouge ;
+feuilles d'érable ;
+lanternes ;
+temples ;
+brume ;
+bois ;
+textures ;
+bulles manga ;
+typographie inspirée manga.
+💬 26. CITATIONS
+
+Nos citations seront intégrées aux différentes étapes du personnage.
+
+Elles ne seront pas nécessaires au fonctionnement JavaScript : elles font déjà partie des images.
+
+Donc notre jeu n'aura qu'à afficher la bonne image.
+
+C'est parfait parce que cela évite de gérer séparément :
+
+personnage
++
+bulle
++
+citation
+
+On affiche simplement l'illustration correspondante.
+
+📱 27. RESPONSIVE
+
+Le site devra fonctionner sur :
+
+🖥️ Desktop
+
+Grande image + interface complète.
+
+💻 Laptop
+
+Adaptation de la taille.
+
+📱 Mobile
+
+Disposition verticale :
+
+Pendu
+
+Mot
+
+Coups restants
+
+Clavier
+
+Proposition du mot
+
+Les boutons devront rester facilement utilisables au doigt.
+
+🧪 28. TESTS
+
+Avant de considérer le projet terminé, on testera chaque fonctionnalité.
+
+Partie
+ mot aléatoire
+ nouveau mot à chaque partie
+ lettres correctes
+ lettres incorrectes
+ lettres répétées
+ clavier virtuel
+ clavier physique
+ proposition du mot
+ mauvaise proposition
+ victoire
+ défaite
+Facile
+ 11 coups
+ 12 images correctement utilisées
+ Game Over à 11
+Difficile
+ potence complète au départ
+ 6 coups
+ Game Over à 6
+Joueurs
+ 1 joueur
+ 2 joueurs
+ 3 joueurs
+ 2 équipes de 2
+ changement de tour
+Navigation
+ lancer
+ abandonner
+ rejouer
+ menu principal
+Personnalisation
+ ajout d'un mot
+ mot ajouté à la partie
+ conservation au moment du replay
+🔧 29. GIT / GITHUB
+
+On ne fera surtout pas un seul énorme commit à la fin.
+
+On fera des commits au fur et à mesure.
+
+Par exemple :
+
+Initialisation du projet
+↓
+Création de la structure HTML
+↓
+Création de la page d'accueil
+↓
+Ajout du design
+↓
+Création de la page de jeu
+↓
+Ajout des assets
+↓
+Création du système de mots
+↓
+Création du clavier
+↓
+Gestion des erreurs
+↓
+Mode facile
+↓
+Mode difficile
+↓
+Système multijoueur
+↓
+Proposition de mot
+↓
+Page de fin
+↓
+Système rejouer
+↓
+Responsive
+↓
+Corrections finales
+
+Puis :
+
+git push
+
+vers GitHub.
+
+📖 30. README.md
+
+Le repository devra également être propre.
+
+On y mettra :
+
+KAGE — Jeu du Pendu
+
+Description
+
+Technologies :
+- HTML
+- CSS
+- JavaScript
+
+Fonctionnalités :
+- ...
+- ...
+- ...
+
+Modes :
+- Facile — 11 coups
+- Difficile — 6 coups
+
+Installation / utilisation
+
+Auteur
+
+Ça donnera une vraie présentation professionnelle du projet.
+
+🎥 31. VIDÉO DE DÉMONSTRATION
+
+Enfin, la vidéo obligatoire Believemy.
+
+On ne fera pas une vidéo de 20 minutes.
+
+On préparera un petit scénario :
+
+1 — Présentation
+
+« Bonjour, je vais vous présenter mon jeu du pendu... »
+
+2 — Accueil
+
+Montrer :
+
+choix joueurs ;
+difficulté ;
+ajout de mot.
+3 — Partie
+
+Montrer :
+
+mot ;
+clavier ;
+clavier physique ;
+bonne lettre ;
+mauvaise lettre ;
+progression du pendu.
+4 — Proposition de mot
+
+Montrer une mauvaise proposition puis éventuellement une bonne.
+
+5 — Victoire
+
+Montrer la page de fin.
+
+6 — Rejouer
+
+Montrer qu'un nouveau mot est sélectionné.
+
+7 — Défaite
+
+Faire volontairement 11 erreurs et montrer :
+
+GAME OVER
+
+8 — Mode difficile
+
+Montrer que la potence est directement construite et que le personnage apparaît en 6 étapes.
+
+9 — Conclusion
+
+Présenter rapidement les technologies utilisées.
+
+🏁 ORDRE EXACT DE DÉVELOPPEMENT
+
+Et surtout, c'est cet ordre que je te propose de suivre :
+
+01. Créer le dossier du projet
+        ↓
+02. Initialiser Git
+        ↓
+03. Créer GitHub
+        ↓
+04. Créer l'arborescence
+        ↓
+05. Ajouter nos 12 images
+        ↓
+06. Créer index.html
+        ↓
+07. Faire le design de l'accueil
+        ↓
+08. Faire les choix joueurs/difficulté
+        ↓
+09. Faire l'ajout de mots
+        ↓
+10. Créer game.html
+        ↓
+11. Afficher le mot aléatoire
+        ↓
+12. Afficher les lettres masquées
+        ↓
+13. Créer le clavier
+        ↓
+14. Ajouter le clavier physique
+        ↓
+15. Gérer les bonnes lettres
+        ↓
+16. Gérer les mauvaises lettres
+        ↓
+17. Connecter les 12 images
+        ↓
+18. Finaliser le mode FACILE 11 coups
+        ↓
+19. Ajouter le mode DIFFICILE 6 coups
+        ↓
+20. Ajouter la proposition de mot
+        ↓
+21. Ajouter la victoire/défaite
+        ↓
+22. Créer endgame.html
+        ↓
+23. Ajouter REJOUER
+        ↓
+24. Ajouter MENU PRINCIPAL
+        ↓
+25. Ajouter le système 2/3 joueurs
+        ↓
+26. Ajouter les équipes 2×2
+        ↓
+27. Finaliser le design
+        ↓
+28. Responsive
+        ↓
+29. Tests complets
+        ↓
+30. README
+        ↓
+31. Git/GitHub final
+        ↓
+32. Vidéo YouTube non répertoriée
+        ↓
+33. Envoi Believemy
+🎯 Et notre stratégie
+
+Je te conseille vraiment de ne pas chercher à faire le jeu complet tout de suite.
+
+On va construire un premier petit objectif :
+
+1 joueur + mode facile + un mot + clavier + 11 images + victoire/défaite.
+
+Quand cette version fonctionne parfaitement, elle devient notre socle.
+
+Ensuite seulement :
+
+mode difficile → proposition de mot → multijoueur → équipes → finitions.
+
+Comme ça, même si on rencontre un problème au milieu, tu comprends pourquoi le code fonctionne, au lieu d'avoir 800 lignes de JavaScript que tu ne maîtrises pas.
+
+Et ça colle parfaitement à l'objectif du projet-passerelle : c'est toi qui construis le projet, moi je te guide et t'explique chaque étape.

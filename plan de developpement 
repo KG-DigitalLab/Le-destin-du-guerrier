@@ -1,0 +1,429 @@
+🎮 LE DESTIN DU GUERRIER — PLAN DE DÉVELOPPEMENT
+
+Notre projet final aura cette architecture :
+
+LE-DESTIN-DU-GUERRIER/
+│
+├── index.html
+├── game.html
+├── endgame.html
+│
+├── css/
+│   ├── style.css
+│   ├── home.css
+│   ├── game.css
+│   └── endgame.css
+│
+├── js/
+│   ├── home.js
+│   ├── game.js
+│   └── endgame.js
+│
+├── assets/
+│   ├── images/
+│   │   ├── background.jpg
+│   │   ├── step-01.png
+│   │   ├── step-02.png
+│   │   ├── ...
+│   │   ├── step-11.png
+│   │   ├── victory.png
+│   │   └── character.png
+│   │
+│   └── audio/
+│       └── ...
+│
+└── README.md
+
+Et évidemment :
+
+Git
+ ↓
+GitHub
+ ↓
+Repository
+ ↓
+Projet Believemy
+🧩 Notre ordre de travail
+
+Je te propose exactement cet ordre :
+
+PHASE 1 — Préparation
+
+1. Créer le repository GitHub
+
+2. Créer l'arborescence du projet
+
+3. Placer nos images dans assets/images
+
+4. Créer les trois pages HTML
+
+À ce stade, les pages existent mais sont quasiment vides.
+
+🏠 PHASE 2 — PAGE D'ACCUEIL
+
+On construit index.html.
+
+Interface
+╔══════════════════════════════════════════════╗
+
+              LE DESTIN DU GUERRIER
+                  Le jeu du pendu
+
+       « Ton destin est entre tes mains. »
+
+              ┌───────────────┐
+              │ 1 JOUEUR      │
+              └───────────────┘
+
+              ┌───────────────┐
+              │ 2 JOUEURS     │
+              └───────────────┘
+
+              ┌───────────────┐
+              │ 3 JOUEURS     │
+              └───────────────┘
+
+              ┌───────────────┐
+              │ 2 ÉQUIPES     │
+              └───────────────┘
+
+
+              DIFFICULTÉ
+
+          ○ FACILE — 11 COUPS
+          ○ DIFFICILE — 6 COUPS
+
+
+          MOT PERSONNALISÉ
+       ┌─────────────────────┐
+       │                     │
+       └─────────────────────┘
+
+          [ AJOUTER LE MOT ]
+
+
+          [ LANCER LA PARTIE ]
+
+╚══════════════════════════════════════════════╝
+
+Le fond sera notre paysage japonais avec la lune rouge.
+
+⚙️ PHASE 3 — JAVASCRIPT DE CONFIGURATION
+
+Quand le joueur clique sur :
+
+LANCER LA PARTIE
+
+on récupère :
+
+nombreDeJoueurs
+difficulte
+motsPersonnalises
+
+Puis on sauvegarde dans localStorage.
+
+Par exemple :
+
+localStorage.setItem("gameSettings", JSON.stringify({
+    players: 1,
+    difficulty: "easy",
+    maxAttempts: 11
+}));
+
+Puis :
+
+window.location.href = "game.html";
+🎮 PHASE 4 — LE CŒUR DU JEU
+
+C'est la partie la plus importante.
+
+On aura :
+
+                LE DESTIN DU GUERRIER
+
+                    JOUEUR 1
+
+                COUPS RESTANTS
+                       11
+
+
+        ┌─────────────────────────────┐
+        │                             │
+        │        IMAGE DU PENDU       │
+        │                             │
+        └─────────────────────────────┘
+
+
+             _  _  _  _  _  _
+
+
+        A B C D E F G H I J K L M
+        N O P Q R S T U V W X Y Z
+
+
+        ┌─────────────────────────────┐
+        │ Proposer le mot...           │
+        └─────────────────────────────┘
+
+             [ PROPOSER LE MOT ]
+
+
+              [ ABANDONNER ]
+🧠 PHASE 5 — LE SYSTÈME DU PENDU
+
+C'est là que nos 11 images vont devenir utiles.
+
+On aura :
+
+const hangmanStages = [
+    "step-01.png",
+    "step-02.png",
+    "step-03.png",
+    "step-04.png",
+    "step-05.png",
+    "step-06.png",
+    "step-07.png",
+    "step-08.png",
+    "step-09.png",
+    "step-10.png",
+    "step-11.png"
+];
+
+Et :
+
+let mistakes = 0;
+
+À chaque mauvaise lettre :
+
+mistakes++;
+
+Puis :
+
+hangmanImage.src = `assets/images/step-${mistakes}.png`;
+
+Donc :
+
+0 erreur → paysage / potence initiale
+1 erreur → étape suivante
+2 erreurs → étape suivante
+...
+11 erreurs → GAME OVER
+
+Important : il faudra déterminer précisément si nos images correspondent à 0→11 ou 1→11. On fera cette correspondance proprement quand on les placera dans le projet.
+
+🔤 PHASE 6 — LE MOT SECRET
+
+Notre JavaScript aura une liste :
+
+const words = [
+    "GUERRIER",
+    "SAMOURAI",
+    "HONNEUR",
+    "COURAGE",
+    "DESTIN",
+    "VICTOIRE",
+    "OMBRE",
+    "LAME",
+    "COMBAT",
+    "ESPRIT"
+];
+
+Puis :
+
+const secretWord =
+    words[Math.floor(Math.random() * words.length)];
+
+Le joueur voit :
+
+_ _ _ _ _ _ _
+
+S'il tape :
+
+E
+
+et que le mot est :
+
+GUERRIER
+
+on obtient :
+
+_ _ E _ _ E _
+
+Toutes les occurrences de la lettre doivent être révélées.
+
+⌨️ PHASE 7 — CLAVIER
+
+On génère automatiquement :
+
+A B C D E F G H I J K L M
+N O P Q R S T U V W X Y Z
+
+Chaque bouton sera relié au même système que le clavier physique.
+
+Donc :
+
+document.addEventListener("keydown", ...)
+
+et :
+
+button.addEventListener("click", ...)
+
+utiliseront la même fonction.
+
+Ça évite d'avoir deux systèmes différents.
+
+🎯 PHASE 8 — PROPOSITION DU MOT
+
+Le joueur peut dire :
+
+[ SAMOURAI ]
+
+[ PROPOSER LE MOT ]
+
+Si :
+
+proposition === secretWord
+
+➡️ victoire immédiate.
+
+Sinon :
+
+mistakes++;
+
+➡️ une vie perdue.
+
+🏆 PHASE 9 — VICTOIRE
+
+On envoie :
+
+endgame.html?result=victory
+
+avec le mot sauvegardé dans localStorage.
+
+Notre image :
+
+🟢 VICTOIRE
+
+avec notre personnage debout et la citation :
+
+« Je n’ai pas échappé à mon destin.
+Je l’ai vaincu. »
+
+☠️ PHASE 10 — GAME OVER
+
+Si :
+
+mistakes === 11
+
+on passe sur :
+
+GAME OVER
+
+avec notre dernière image du personnage.
+
+Citation :
+
+« Certaines leçons font plus mal que des échecs,
+mais elles rendent plus fort. »
+
+🔄 PHASE 11 — REJOUER
+
+Le bouton :
+
+REJOUER
+
+doit conserver :
+
+Nombre de joueurs
++
+Difficulté
++
+Mots personnalisés
+
+mais choisir un nouveau mot aléatoire.
+
+Donc :
+
+REJOUER
+   ↓
+nouveau mot
+   ↓
+nouvelle partie
+🏠 PHASE 12 — MENU PRINCIPAL
+
+Le bouton :
+
+MENU PRINCIPAL
+
+fait simplement :
+
+endgame.html
+       ↓
+index.html
+
+et permet de tout reconfigurer.
+
+🧪 PHASE 13 — TESTS
+
+Avant de considérer le projet terminé, on testera chaque scénario :
+
+Victoire avec lettres
+A → mauvaise
+E → bonne
+R → bonne
+...
+→ victoire
+Défaite avec lettres
+A → erreur 1
+B → erreur 2
+...
+K → erreur 11
+→ GAME OVER
+Proposition correcte
+PROPOSER LE MOT
+       ↓
+VICTOIRE
+Proposition incorrecte
+PROPOSER LE MOT
+       ↓
+-1 coup
+Clavier physique
+A → fonctionne
+Clavier virtuel
+A → fonctionne
+Lettre déjà utilisée
+A → bouton désactivé
+Rejouer
+nouveau mot
+paramètres conservés
+🚀 Et surtout : on va le faire comme un vrai projet de développeur
+
+Je te conseille qu'on avance fonctionnalité par fonctionnalité, et pas que je te balance 1 000 lignes de JavaScript.
+
+On va comprendre chaque ligne que tu écris, parce que ton objectif est aussi de pouvoir présenter le projet dans ta vidéo Believemy.
+
+Notre toute première étape maintenant
+
+On crée :
+
+LE-DESTIN-DU-GUERRIER/
+│
+├── index.html
+├── game.html
+├── endgame.html
+│
+├── css/
+│   ├── style.css
+│   ├── home.css
+│   ├── game.css
+│   └── endgame.css
+│
+├── js/
+│   ├── home.js
+│   ├── game.js
+│   └── endgame.js
+│
+└── assets/
+    └── images/
+
+Ensuite seulement, on commence index.html et on construit la page d'accueil avec notre univers visuel.
