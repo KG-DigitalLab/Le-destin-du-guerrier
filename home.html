@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/image/logo.png" />
+    <title>Le Destin du Guerrier</title>
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
+      <h1>LE DESTIN DU GUERRIER</h1>
+    </header>
+    <main>
+      <h2>Le guerrier sera t-il pendu ?</h2>
+      <p>
+        Bienvenue, guerrier. Ici commence ton destin. Chaque choix te
+        rapprochera de la victoire ou de la défaite ⚔️
+      </p>
+      <p>Choisis ton destin</p>
+
+      <form id="gamePlan">
+        <fieldset>
+          <legend>Choisis le nombre de joueurs</legend>
+          <input type="radio" id="1player" name="player" value="1" required />
+          <label for="1player">1 joueur</label>
+
+          <input type="radio" id="2players" name="player" value="2" required />
+          <label for="2players">2 joueurs</label>
+
+          <input type="radio" id="3players" name="player" value="3" required />
+          <label for="3players">3 joueurs</label>
+
+          <input type="radio" id="4players" name="player" value="4" required />
+          <label for="4players">4 joueurs [2 équipes]</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Noms des joueurs et des équipes</legend>
+          <label for="player1">Joueur 1</label>
+          <input
+            type="text"
+            id="player1"
+            name="player1"
+            placeholder="Nom du joueur 1"
+            required
+          />
+
+          <label for="player2">Joueur 2</label>
+          <input
+            type="text"
+            id="player2"
+            name="player2"
+            placeholder="Nom du joueur 2"
+          />
+
+          <label for="player3">Joueur 3</label>
+          <input
+            type="text"
+            id="player3"
+            name="player3"
+            placeholder="Nom du joueur 3"
+          />
+          <label for="player4">Joueur 4</label>
+          <input
+            type="text"
+            id="player4"
+            name="player4"
+            placeholder="Nom du joueur 4"
+          />
+
+          <label for="team1">Equipe 1</label>
+          <input
+            type="text"
+            id="team1"
+            name="team1"
+            placeholder="Nom de l'équipe 1"
+          />
+          <label for="team2">Equipe 2</label>
+          <input
+            type="text"
+            id="team2"
+            name="team2"
+            placeholder="Nom de l'équipe 2"
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend>Choisis ta voie ⚔️</legend>
+
+          <input type="radio" id="guerrier" name="path" value="11" required />
+          <label for="guerrier">La voie du guerrier 🥷</label>
+
+          <input type="radio" id="dragon" name="path" value="6" required />
+          <label for="dragon">La voie du dragon 🐉</label>
+        </fieldset>
+
+        <button id="submitButton" type="submit">Valider</button>
+      </form>
+    </main>
+    <script src="home.js"></script>
+  </body>
+</html>
