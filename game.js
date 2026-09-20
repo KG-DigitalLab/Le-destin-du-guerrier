@@ -10,9 +10,16 @@ console.log(player);
 const team = JSON.parse(localStorage.getItem("team"));
 console.log(team);
 
+const nameTeam = document.querySelector("#nameTeam");
+
 const keys = document.querySelectorAll(".key");
 
 const pendu = document.querySelector("#pendu");
+
+const scoreList = document.querySelector("#scoreList");
+
+const scorePlayers = document.querySelectorAll(".scorePlayer");
+const scoreTeam = document.querySelectorAll(".scoreTeam");
 
 let currentPlayer = 0;
 
@@ -20,6 +27,57 @@ let maskedWord;
 let secretWord;
 let counter;
 let errors;
+let usedLetters = [];
+let playerScore = [];
+let teamScore = [];
+
+player.forEach((player, index) => {
+  playerScore.push(0);
+});
+
+team.forEach((team, index) => {
+  teamScore.push(0);
+});
+
+function displayCurrentPlayer() {
+  document.querySelector("#namePlayer").textContent =
+    `⚔️ Le destin est entre tes mains : ${player[currentPlayer]}`;
+
+  if (number === "4") {
+    const currentTeam =
+      currentPlayer === 0 || currentPlayer === 1 ? team[0] : team[1];
+    document.querySelector("#nameTeam").textContent =
+      `🏯 Tu combats pour : ${currentTeam}`;
+  }
+}
+displayCurrentPlayer();
+displayScore();
+
+function displayScore() {
+  if (number === "4") {
+    scorePlayers.forEach((scorePlayer) => {
+      scorePlayer.style.display = "none";
+    });
+
+    scoreTeam.forEach((scoreTeam, index) => {
+      scoreTeam.style.display = "list-item";
+      scoreTeam.textContent = `${team[index]} : ${teamScore[index]}`;
+    });
+  } else {
+    scorePlayers.forEach((scorePlayer, index) => {
+      if (index < number) {
+        scorePlayer.style.display = "list-item";
+        scorePlayer.textContent = `${player[index]} : ${playerScore[index]}`;
+      } else {
+        scorePlayer.style.display = "none";
+      }
+    });
+
+    scoreTeam.forEach((scoreTeam) => {
+      scoreTeam.style.display = "none";
+    });
+  }
+}
 
 function playLetter(letter) {
   console.log(letter);
@@ -28,6 +86,33 @@ function playLetter(letter) {
 
   if (counter === 0) {
     return;
+  }
+
+  const key = document.querySelector(`.key[data-letter="${letter}"]`);
+
+  if (usedLetters.includes(letter)) {
+    return;
+  }
+  usedLetters.push(letter);
+
+  if (!secretWord.includes(letter)) {
+    key.classList.add("wrong");
+  } else {
+    key.classList.add("correct");
+    if (number === "4") {
+      let teamIndex;
+
+      if (currentPlayer === 0 || currentPlayer === 1) {
+        teamIndex = 0;
+      } else {
+        teamIndex = 1;
+      }
+      teamScore[teamIndex]++;
+    } else {
+      playerScore[currentPlayer]++;
+    }
+
+    displayScore();
   }
 
   newMaskedWord = secretWord
@@ -60,6 +145,27 @@ function playLetter(letter) {
     pendu.src = "assets/image/pendu11.PNG";
     return;
   }
+
+  if (number === "4") {
+    if (currentPlayer === 0) {
+      currentPlayer = 2;
+    } else if (currentPlayer === 2) {
+      currentPlayer = 1;
+    } else if (currentPlayer === 1) {
+      currentPlayer = 3;
+    } else {
+      currentPlayer = 0;
+    }
+  } else {
+    if (currentPlayer === number - 1) {
+      currentPlayer = 0;
+    } else {
+      currentPlayer = currentPlayer + 1;
+    }
+  }
+  console.log("Nouveau joueur :", currentPlayer);
+
+  displayCurrentPlayer();
 }
 
 const words = async () => {
@@ -88,11 +194,6 @@ const startGame = async () => {
     `🩸 Le destin se referme : ${counter} tentatives`;
 };
 startGame();
-
-document.querySelector("#namePlayer").textContent =
-  `⚔️ Le destin est entre tes mains : ${player[currentPlayer]}`;
-
-console.log(currentPlayer);
 
 document.addEventListener("keydown", (event) => {
   if (/^[A-Z]$/.test(event.key.toUpperCase())) {
