@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/image/logo.png" />
     <link rel="stylesheet" href="game.css" />
     <title>Le Destin du Guerrier</title>
   </head>
@@ -67,8 +68,24 @@
             type="text"
             id="proposition"
             placeholder="Écris le mot secret"
+            autocomplete="off"
           />
           <button id="validateProposal">Valider</button>
+
+          <h3>📝 Mots proposés</h3>
+          <ul id="proposalList"></ul>
+
+          <dialog id="quitGame">
+            <p>
+              Celui qui accepte la chute peut se relever. Celui qui abandonne
+              choisit de rester à terre.
+            </p>
+
+            <p>Veux-tu vraiment abandonner ton destin ?</p>
+
+            <button id="confirmQuit">Je veux abandonner</button>
+            <button id="cancelQuit">Je veux me relever</button>
+          </dialog>
         </div>
       </section>
 

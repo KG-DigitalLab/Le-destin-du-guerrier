@@ -11,40 +11,62 @@ const teamList = [];
 
 gamePlan.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  let valid = true;
+
   const selectedPlayer = document.querySelector(
     '[name="player"]:checked',
   ).value;
+
   numberOfPlayers = selectedPlayer;
+
   const selectedLevel = document.querySelector('[name="path"]:checked').value;
+
   level = selectedLevel;
+
   playerList.length = 0;
   teamList.length = 0;
 
-  //   console.log(numberOfPlayers);
-  //   console.log(level);
-
-  localStorage.setItem("number", JSON.stringify(numberOfPlayers));
-  console.log(JSON.parse(localStorage.getItem("number")));
-
-  localStorage.setItem("level", JSON.stringify(level));
-  console.log(JSON.parse(localStorage.getItem("level")));
-
   playersNames.forEach((playerName, index) => {
     if (index < numberOfPlayers) {
-      playerList.push(playerName.value);
+      const name = playerName.value.trim();
+
+      if (name === "") {
+        valid = false;
+        playerName.focus();
+        return;
+      }
+
+      playerList.push(name);
     }
   });
-  //   console.log(playerList);
-  localStorage.setItem("player", JSON.stringify(playerList));
-  console.log(JSON.parse(localStorage.getItem("player")));
 
   if (numberOfPlayers === "4") {
     teamsNames.forEach((teamName) => {
-      teamList.push(teamName.value);
+      const name = teamName.value.trim();
+
+      if (name === "") {
+        valid = false;
+        teamName.focus();
+        return;
+      }
+
+      teamList.push(name);
     });
   }
-  //   console.log(teamList);
+
+  if (!valid) {
+    return;
+  }
+
+  localStorage.setItem("number", JSON.stringify(numberOfPlayers));
+  localStorage.setItem("level", JSON.stringify(level));
+  localStorage.setItem("player", JSON.stringify(playerList));
   localStorage.setItem("team", JSON.stringify(teamList));
+
+  console.log(JSON.parse(localStorage.getItem("number")));
+  console.log(JSON.parse(localStorage.getItem("level")));
+  console.log(JSON.parse(localStorage.getItem("player")));
   console.log(JSON.parse(localStorage.getItem("team")));
 
   location.href = "game.html";
