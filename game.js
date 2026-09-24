@@ -10,6 +10,10 @@ console.log(player);
 const team = JSON.parse(localStorage.getItem("team"));
 console.log(team);
 
+const nextPenalty = JSON.parse(localStorage.getItem("nextPenalty"));
+
+let gameStats = JSON.parse(localStorage.getItem("gameStats"));
+
 const nameTeam = document.querySelector("#nameTeam");
 
 const keys = document.querySelectorAll(".key");
@@ -32,6 +36,9 @@ const cancelQuit = document.querySelector("#cancelQuit");
 
 const proposalList = document.querySelector("#proposalList");
 
+const gameScoreTitle = document.querySelector("#gameScoreTitle");
+const gameScore = document.querySelector("#gameScore");
+
 let currentPlayer = 0;
 let teamIndex;
 
@@ -45,12 +52,32 @@ let playerScore = [];
 let teamScore = [];
 let wordProposal = [];
 
-player.forEach((player) => {
-  playerScore.push(0);
+if (!gameStats) {
+  gameStats = {
+    playerWins: Array(Number(number)).fill(0),
+    teamWins: [0, 0],
+    wordsFound: 0,
+  };
+}
+
+player.forEach((player, index) => {
+  playerScore.push(
+    nextPenalty &&
+      nextPenalty.type === "player" &&
+      nextPenalty.indices.includes(index)
+      ? -1
+      : 0,
+  );
 });
 
-team.forEach((team) => {
-  teamScore.push(0);
+team.forEach((team, index) => {
+  teamScore.push(
+    nextPenalty &&
+      nextPenalty.type === "team" &&
+      nextPenalty.indices.includes(index)
+      ? -1
+      : 0,
+  );
 });
 
 function displayCurrentPlayer() {
@@ -89,11 +116,43 @@ function displayScore() {
       scoreTeam.style.display = "none";
     });
   }
+
+  const hasWonRound =
+    (number === "1" && gameStats.wordsFound > 0) ||
+    ((number === "2" || number === "3") &&
+      gameStats.playerWins.some((wins) => wins > 0)) ||
+    (number === "4" && gameStats.teamWins.some((wins) => wins > 0));
+
+  if (hasWonRound) {
+    gameScoreTitle.style.display = "block";
+    gameScore.style.display = "block";
+
+    gameScore.innerHTML = "";
+
+    if (number === "1") {
+      const score = document.createElement("li");
+      score.textContent = `${player[0]} : ${gameStats.wordsFound}`;
+      gameScore.append(score);
+    } else if (number === "2" || number === "3") {
+      gameStats.playerWins.forEach((playerWins, index) => {
+        const score = document.createElement("li");
+        score.textContent = `${player[index]} : ${playerWins}`;
+        gameScore.append(score);
+      });
+    } else {
+      gameStats.teamWins.forEach((teamWins, index) => {
+        const score = document.createElement("li");
+        score.textContent = `${team[index]} : ${teamWins}`;
+        gameScore.append(score);
+      });
+    }
+  }
 }
 
 function endGame(result) {
   localStorage.setItem("gameResult", JSON.stringify(result));
   localStorage.setItem("secretWord", JSON.stringify(secretWord));
+  localStorage.setItem("gameResultProcessed", JSON.stringify(false));
 
   location.href = "endgame.html";
 }
@@ -122,7 +181,6 @@ function changePlayer() {
 }
 
 function playLetter(letter) {
-  // Empêche toute action avant le chargement du mot
   if (!secretWord || !maskedWord || counter === undefined) {
     return;
   }
@@ -171,7 +229,10 @@ function playLetter(letter) {
 
   if (maskedWord.join("") === secretWord) {
     pendu.src = "assets/image/penduWin.PNG";
-    endGame("win");
+    endGame({
+      result: "win",
+      winner: number === "4" ? team[teamIndex] : player[currentPlayer],
+    });
     return;
   }
 
@@ -191,7 +252,37 @@ function playLetter(letter) {
 
   if (counter === 0) {
     pendu.src = "assets/image/pendu11.PNG";
-    endGame("lose");
+
+    if (number === "1") {
+      endGame({
+        result: "lose",
+        penalized: [],
+      });
+      return;
+    }
+
+    const scores = number === "4" ? teamScore : playerScore;
+    const lowestScore = Math.min(...scores);
+    const penalized = [];
+
+    scores.forEach((score, index) => {
+      if (score === lowestScore) {
+        penalized.push(index);
+      }
+    });
+
+    if (scores.every((score) => score === lowestScore)) {
+      endGame({
+        result: "draw",
+        penalized: [],
+      });
+    } else {
+      endGame({
+        result: "lose",
+        penalized: penalized,
+      });
+    }
+
     return;
   }
 
@@ -275,7 +366,10 @@ proposalButton.addEventListener("click", () => {
     displayScore();
 
     pendu.src = "assets/image/penduWin.PNG";
-    endGame("win");
+    endGame({
+      result: "win",
+      winner: number === "4" ? team[teamIndex] : player[currentPlayer],
+    });
     return;
   }
 
@@ -315,7 +409,37 @@ proposalButton.addEventListener("click", () => {
 
   if (counter === 0) {
     pendu.src = "assets/image/pendu11.PNG";
-    endGame("lose");
+
+    if (number === "1") {
+      endGame({
+        result: "lose",
+        penalized: [],
+      });
+      return;
+    }
+
+    const scores = number === "4" ? teamScore : playerScore;
+    const lowestScore = Math.min(...scores);
+    const penalized = [];
+
+    scores.forEach((score, index) => {
+      if (score === lowestScore) {
+        penalized.push(index);
+      }
+    });
+
+    if (scores.every((score) => score === lowestScore)) {
+      endGame({
+        result: "draw",
+        penalized: [],
+      });
+    } else {
+      endGame({
+        result: "lose",
+        penalized: penalized,
+      });
+    }
+
     return;
   }
 

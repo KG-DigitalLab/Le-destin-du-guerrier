@@ -59,6 +59,9 @@ gamePlan.addEventListener("submit", (event) => {
     return;
   }
 
+  localStorage.removeItem("gameStats");
+  localStorage.removeItem("nextPenalty");
+
   localStorage.setItem("number", JSON.stringify(numberOfPlayers));
   localStorage.setItem("level", JSON.stringify(level));
   localStorage.setItem("player", JSON.stringify(playerList));

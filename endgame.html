@@ -1,9 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" href="assets/image/logo.png" />
+    <title>Le Destin du Guerrier</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
+      <h1>LE DESTIN DU GUERRIER</h1>
+    </header>
+    <main>
+      <section id="end">
+        <h2 id="result"></h2>
+        <h3 id="penalty"></h3>
+        <img id="final" alt="Résultat de la partie" />
+        <p id="secret"></p>
+
+        <div>
+          <button id="replay">🔄 Rejouer</button>
+          <button id="changeDifficulty">⚙️ Changer de voie</button>
+          <button id="quit">🏠 Quitter</button>
+          <div id="difficultyChoice">
+            <fieldset>
+              <legend>⚔️ Choisis ta voie</legend>
+
+              <input type="radio" id="guerrier" name="path" value="11" />
+              <label for="guerrier">La voie du guerrier 🥷</label>
+
+              <input type="radio" id="dragon" name="path" value="6" />
+              <label for="dragon">La voie du dragon 🐉</label>
+
+              <button id="launchGame">Lancer la partie</button>
+            </fieldset>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>© 2026 — Le Destin du Guerrier</p>
+    </footer>
+    <script src="endgame.js"></script>
+  </body>
 </html>
