@@ -1,1 +1,391 @@
- 
+/* === POLICE === */
+
+@import url("https://fonts.googleapis.com/css2?family=Shojumaru&family=Teko:wght@300..700&display=swap");
+
+/* === VARIABLES === */
+
+:root {
+  --primary-color: #d62828;
+  --text-color: #ffffff;
+  --title-color: #f5eee6;
+  --background-color: #0b0b0b;
+  --background-color-2: #151515;
+  --border: #d62828;
+  --corner: 8px;
+}
+
+/* === STYLE PAR DEFAUT === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === RESET === */
+body {
+  font-family: "Teko", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+li {
+  list-style-type: none;
+}
+
+button {
+  border: none;
+}
+
+/* === CONTAINER === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* === HEADER === */
+header {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border);
+}
+
+header .container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  width: 100px;
+}
+
+/* === TITLE === */
+
+h1 {
+  font-family: "Shojumaru", cursive;
+  color: var(--title-color);
+  text-shadow:
+    2px 3px 3px #000000,
+    3px 4px 5px var(--primary-color);
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-family: "Shojumaru", cursive;
+  font-size: 2rem;
+  color: var(--title-color);
+  text-align: center;
+  text-shadow:
+    4px 4px 0 #000000,
+    -2px -2px 0 var(--primary-color),
+    2px -2px 0 var(--primary-color),
+    -2px 2px 0 var(--primary-color),
+    2px 2px 0 var(--primary-color);
+}
+
+/* === MAIN === */
+main {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-image: url("assets/image/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+main .container {
+  padding-top: 30px;
+}
+
+main p {
+  font-size: 1.3rem;
+  text-align: center;
+  text-shadow: 2px 3px 1px #000000;
+  margin: 20px;
+}
+
+/* === FIELDSETS === */
+
+fieldset {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+  border-radius: var(--corner);
+  padding: 10px;
+  margin: 25px;
+}
+
+legend {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 3px 1px #000000;
+}
+
+input {
+  font-size: 1rem;
+  padding: 3px 8px;
+  border-radius: var(--corner);
+}
+
+.player-choice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.choice-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.choice-item:hover {
+  transform: scale(1.05);
+  color: var(--title-color);
+  text-shadow: 2px 2px 2px #000000;
+}
+
+.choice-item input {
+  accent-color: var(--primary-color);
+}
+.choice-item,
+.choice-item * {
+  cursor: pointer;
+}
+
+.name-player {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.name-player label {
+  cursor: pointer;
+}
+
+.name-team {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 15px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.name-team label {
+  cursor: pointer;
+}
+
+.choice-path {
+  font-size: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+}
+
+.choice-path .choice-item:first-child {
+  grid-column: 2;
+}
+
+.choice-path .choice-item:last-child {
+  grid-column: 4;
+}
+
+#submitButton {
+  font-family: "Shojumaru", cursive;
+  color: var(--title-color);
+  text-shadow: 2px 2px 2px #000000;
+  display: block;
+  margin: 25px auto 0;
+  padding: 10px 30px;
+  background-color: var(--primary-color);
+  color: var(--title-color);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#submitButton:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+#submitButton:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #8f1515;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* === MEDIA QUERY === */
+
+/* === SMARTPHONE === */
+@media (max-width: 768px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  header .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  main {
+    width: 100%;
+    background-image: url("assets/image/background-mobile.png");
+    padding-bottom: 40px;
+  }
+
+  main h2 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  main p {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .player-choice {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .name-player,
+  .name-team {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .name-player input,
+  .name-team input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .choice-path {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .choice-path .choice-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  #submitButton {
+    margin: 15px auto 0;
+    padding: 8px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+/* === TABLETTE === */
+
+@media (min-width: 769px) and (max-width: 1189px) {
+  fieldset {
+    margin: 15px;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  main p {
+    font-size: 1.45rem;
+  }
+
+  legend {
+    font-size: 1.5rem;
+  }
+
+  main {
+    width: 100%;
+    background-image: url("assets/image/background-mobile.png");
+    padding-bottom: 40px;
+  }
+
+  .name-player {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
+    gap: 10px;
+  }
+
+  .name-player input {
+    width: 100%;
+  }
+
+  .player-choice,
+  .name-player,
+  .name-team,
+  .choice-path {
+    font-size: 1.4rem;
+  }
+
+  legend {
+    font-size: 1.6rem;
+  }
+}

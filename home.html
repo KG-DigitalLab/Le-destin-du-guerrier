@@ -4,109 +4,165 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="assets/image/logo.png" />
+    <link rel="stylesheet" href="home.css" />
     <title>Le Destin du Guerrier</title>
   </head>
   <body>
     <header>
-      <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
-      <h1>LE DESTIN DU GUERRIER</h1>
+      <div class="container">
+        <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
+        <h1>LE DESTIN DU GUERRIER</h1>
+      </div>
     </header>
     <main>
-      <h2>Le guerrier sera t-il pendu ?</h2>
-      <p>
-        Bienvenue, guerrier. Ici commence ton destin. Chaque choix te
-        rapprochera de la victoire ou de la défaite ⚔️
-      </p>
-      <p>Choisis ton destin</p>
+      <div class="container">
+        <h2>Le guerrier sera t-il pendu ?</h2>
+        <p>
+          Bienvenue, guerrier. Ici commence ton destin. Chaque choix te
+          rapprochera de la victoire ou de la défaite ⚔️
+        </p>
 
-      <form id="gamePlan">
-        <fieldset>
-          <legend>Choisis le nombre de joueurs</legend>
-          <input type="radio" id="1player" name="player" value="1" required />
-          <label for="1player">1 joueur</label>
+        <form id="gamePlan">
+          <fieldset>
+            <legend>Choisis le nombre de joueurs</legend>
+            <div class="player-choice">
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="1player"
+                  name="player"
+                  value="1"
+                  required
+                />
+                <label for="1player">1 joueur</label>
+              </div>
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="2players"
+                  name="player"
+                  value="2"
+                  required
+                />
+                <label for="2players">2 joueurs</label>
+              </div>
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="3players"
+                  name="player"
+                  value="3"
+                  required
+                />
+                <label for="3players">3 joueurs</label>
+              </div>
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="4players"
+                  name="player"
+                  value="4"
+                  required
+                />
+                <label for="4players">4 joueurs [2 équipes]</label>
+              </div>
+            </div>
+          </fieldset>
 
-          <input type="radio" id="2players" name="player" value="2" required />
-          <label for="2players">2 joueurs</label>
+          <fieldset>
+            <legend>Noms des joueurs et des équipes</legend>
+            <div class="name-player">
+              <label for="player1">Joueur 1</label>
+              <input
+                type="text"
+                id="player1"
+                name="player1"
+                placeholder="Nom du joueur 1"
+                autocomplete="off"
+                required
+              />
 
-          <input type="radio" id="3players" name="player" value="3" required />
-          <label for="3players">3 joueurs</label>
+              <label for="player2">Joueur 2</label>
+              <input
+                type="text"
+                id="player2"
+                name="player2"
+                placeholder="Nom du joueur 2"
+                autocomplete="off"
+              />
 
-          <input type="radio" id="4players" name="player" value="4" required />
-          <label for="4players">4 joueurs [2 équipes]</label>
-        </fieldset>
+              <label for="player3">Joueur 3</label>
+              <input
+                type="text"
+                id="player3"
+                name="player3"
+                placeholder="Nom du joueur 3"
+                autocomplete="off"
+              />
+              <label for="player4">Joueur 4</label>
+              <input
+                type="text"
+                id="player4"
+                name="player4"
+                placeholder="Nom du joueur 4"
+                autocomplete="off"
+              />
+            </div>
+            <div class="name-team">
+              <label for="team1">Équipe 1</label>
+              <input
+                type="text"
+                id="team1"
+                name="team1"
+                placeholder="Nom de l'équipe 1"
+                autocomplete="off"
+              />
+              <label for="team2">Équipe 2</label>
+              <input
+                type="text"
+                id="team2"
+                name="team2"
+                placeholder="Nom de l'équipe 2"
+                autocomplete="off"
+              />
+            </div>
+          </fieldset>
 
-        <fieldset>
-          <legend>Noms des joueurs et des équipes</legend>
-          <label for="player1">Joueur 1</label>
-          <input
-            type="text"
-            id="player1"
-            name="player1"
-            placeholder="Nom du joueur 1"
-            autocomplete="off"
-            required
-          />
+          <fieldset>
+            <legend>Choisis ta voie ⚔️</legend>
+            <div class="choice-path">
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="guerrier"
+                  name="path"
+                  value="11"
+                  required
+                />
+                <label for="guerrier">La voie du guerrier 🥷</label>
+              </div>
+              <div class="choice-item">
+                <input
+                  type="radio"
+                  id="dragon"
+                  name="path"
+                  value="6"
+                  required
+                />
+                <label for="dragon">La voie du dragon 🐉</label>
+              </div>
+            </div>
+          </fieldset>
 
-          <label for="player2">Joueur 2</label>
-          <input
-            type="text"
-            id="player2"
-            name="player2"
-            placeholder="Nom du joueur 2"
-            autocomplete="off"
-          />
-
-          <label for="player3">Joueur 3</label>
-          <input
-            type="text"
-            id="player3"
-            name="player3"
-            placeholder="Nom du joueur 3"
-            autocomplete="off"
-          />
-          <label for="player4">Joueur 4</label>
-          <input
-            type="text"
-            id="player4"
-            name="player4"
-            placeholder="Nom du joueur 4"
-            autocomplete="off"
-          />
-
-          <label for="team1">Équipe 1</label>
-          <input
-            type="text"
-            id="team1"
-            name="team1"
-            placeholder="Nom de l'équipe 1"
-            autocomplete="off"
-          />
-          <label for="team2">Équipe 2</label>
-          <input
-            type="text"
-            id="team2"
-            name="team2"
-            placeholder="Nom de l'équipe 2"
-            autocomplete="off"
-          />
-        </fieldset>
-
-        <fieldset>
-          <legend>Choisis ta voie ⚔️</legend>
-
-          <input type="radio" id="guerrier" name="path" value="11" required />
-          <label for="guerrier">La voie du guerrier 🥷</label>
-
-          <input type="radio" id="dragon" name="path" value="6" required />
-          <label for="dragon">La voie du dragon 🐉</label>
-        </fieldset>
-
-        <button id="submitButton" type="submit">Valider</button>
-      </form>
+          <button id="submitButton" type="submit">Valider</button>
+        </form>
+      </div>
     </main>
 
     <footer>
-      <p>© 2026 — Le Destin du Guerrier</p>
+      <div class="container">
+        <p>© 2026 — Le Destin du Guerrier</p>
+      </div>
     </footer>
     <script src="home.js"></script>
   </body>

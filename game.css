@@ -1,3 +1,93 @@
+/* === POLICE === */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Shojumaru&display=swap");
+
+/* === VARIABLES === */
+
+:root {
+  --primary-color: #d62828;
+  --text-color: #ffffff;
+  --title-color: #f5eee6;
+  --background-color: #0b0b0b;
+  --background-color-2: #151515;
+  --border: #d62828;
+  --corner: 8px;
+}
+
+/* === STYLE PAR DEFAUT === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === RESET === */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+li {
+  list-style-type: none;
+}
+
+button {
+  border: none;
+}
+
+/* === CONTAINER === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* === HEADER === */
+header {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border);
+}
+
+header .container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  width: 100px;
+}
+
+h1 {
+  font-family: "Shojumaru", cursive;
+  color: var(--title-color);
+  text-shadow:
+    2px 3px 3px #000000,
+    3px 4px 5px var(--primary-color);
+}
+
+/* === MAIN === */
+main {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-image: url("assets/image/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .key.wrong {
   background-color: red;
 }
