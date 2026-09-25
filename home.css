@@ -90,6 +90,14 @@ h2 {
     2px 2px 0 var(--primary-color);
 }
 
+h3 {
+  color: var(--title-color);
+}
+
+h4 {
+  color: var(--title-color);
+}
+
 /* === MAIN === */
 main {
   margin: 0;
@@ -180,6 +188,12 @@ input {
   cursor: pointer;
 }
 
+.name-player input {
+  font-family: "Teko", sans-serif;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+}
+
 .name-team {
   font-size: 1.2rem;
   display: flex;
@@ -192,6 +206,12 @@ input {
 
 .name-team label {
   cursor: pointer;
+}
+
+.name-team input {
+  font-family: "Teko", sans-serif;
+  font-size: 1.1rem;
+  padding: 5px 10px;
 }
 
 .choice-path {
@@ -292,6 +312,7 @@ footer p {
   main {
     width: 100%;
     background-image: url("assets/image/background-mobile.png");
+
     padding-bottom: 40px;
   }
 

@@ -7,75 +7,138 @@
     <link rel="stylesheet" href="game.css" />
     <title>Le Destin du Guerrier</title>
   </head>
+
   <body>
     <header>
       <div class="container">
         <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
+
         <h1>LE DESTIN DU GUERRIER</h1>
       </div>
     </header>
 
     <main>
-      <section>
-        <h2 id="namePlayer">⚔️ Le destin est entre tes mains</h2>
-        <h3 id="nameTeam"></h3>
+      <div class="container">
+        <!-- === INFORMATIONS DE LA PARTIE === -->
+        <section class="game-info">
+          <h2 id="namePlayer">⚔️ Le destin est entre tes mains</h2>
 
-        <p><i>🔥 La victoire appartient à celui qui refuse d'abandonner.</i></p>
-        <p id="attempts">🩸 Le destin se referme : X tentatives</p>
-      </section>
+          <h3 id="nameTeam"></h3>
 
-      <section>
-        <img id="pendu" alt="image 0 du pendu" />
-      </section>
+          <p>
+            <i>🔥 La victoire appartient à celui qui refuse d'abandonner.</i>
+          </p>
 
-      <section>
-        <div>
-          <p id="word">Mot secret</p>
+          <p id="attempts">🩸 Le destin se referme : X tentatives</p>
+        </section>
+
+        <!-- === JEU === -->
+        <div class="game-layout">
+          <!-- === SCORES === -->
+          <section class="game-left">
+            <div class="score">
+              <h3>🏆 SCORES</h3>
+
+              <div class="score-details">
+                <!-- Manche actuelle -->
+                <div class="score-current">
+                  <h4>🔥 MANCHE ACTUELLE</h4>
+
+                  <ul id="scoreList">
+                    <li class="scorePlayer"></li>
+                    <li class="scorePlayer"></li>
+                    <li class="scorePlayer"></li>
+                    <li class="scoreTeam"></li>
+                    <li class="scoreTeam"></li>
+                  </ul>
+                </div>
+
+                <!-- Manches gagnées -->
+                <div class="score-wins">
+                  <h4 id="gameScoreTitle" style="display: none">
+                    🏆 MANCHES GAGNEES
+                  </h4>
+
+                  <ul id="gameScore" style="display: none"></ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- === JEU CENTRAL === -->
+          <section class="game-center">
+            <!-- Pendu -->
+            <section class="hangman">
+              <img id="pendu" alt="image 0 du pendu" />
+            </section>
+
+            <!-- Mot + clavier -->
+            <section class="game-word">
+              <div>
+                <p id="word">Mot secret</p>
+              </div>
+
+              <div id="keyboard">
+                <button class="key" data-letter="A">A</button>
+                <button class="key" data-letter="B">B</button>
+                <button class="key" data-letter="C">C</button>
+                <button class="key" data-letter="D">D</button>
+                <button class="key" data-letter="E">E</button>
+                <button class="key" data-letter="F">F</button>
+                <button class="key" data-letter="G">G</button>
+                <button class="key" data-letter="H">H</button>
+                <button class="key" data-letter="I">I</button>
+                <button class="key" data-letter="J">J</button>
+                <button class="key" data-letter="K">K</button>
+                <button class="key" data-letter="L">L</button>
+                <button class="key" data-letter="M">M</button>
+                <button class="key" data-letter="N">N</button>
+                <button class="key" data-letter="O">O</button>
+                <button class="key" data-letter="P">P</button>
+                <button class="key" data-letter="Q">Q</button>
+                <button class="key" data-letter="R">R</button>
+                <button class="key" data-letter="S">S</button>
+                <button class="key" data-letter="T">T</button>
+                <button class="key" data-letter="U">U</button>
+                <button class="key" data-letter="V">V</button>
+                <button class="key" data-letter="W">W</button>
+                <button class="key" data-letter="X">X</button>
+                <button class="key" data-letter="Y">Y</button>
+                <button class="key" data-letter="Z">Z</button>
+              </div>
+            </section>
+          </section>
+
+          <!-- === PROPOSITION DE MOT === -->
+          <section class="game-right">
+            <div class="wordSecret">
+              <p>🌑 Scelle ton destin… ou défie-le.</p>
+
+              <input
+                type="text"
+                id="proposition"
+                placeholder="Écris le mot secret"
+                autocomplete="off"
+              />
+
+              <button id="validateProposal">Valider</button>
+            </div>
+
+            <div class="wordProposal">
+              <h3>📝 Mots proposés</h3>
+
+              <ul id="proposalList"></ul>
+            </div>
+          </section>
         </div>
 
-        <div id="keyboard">
-          <button class="key" data-letter="A">A</button>
-          <button class="key" data-letter="B">B</button>
-          <button class="key" data-letter="C">C</button>
-          <button class="key" data-letter="D">D</button>
-          <button class="key" data-letter="E">E</button>
-          <button class="key" data-letter="F">F</button>
-          <button class="key" data-letter="G">G</button>
-          <button class="key" data-letter="H">H</button>
-          <button class="key" data-letter="I">I</button>
-          <button class="key" data-letter="J">J</button>
-          <button class="key" data-letter="K">K</button>
-          <button class="key" data-letter="L">L</button>
-          <button class="key" data-letter="M">M</button>
-          <button class="key" data-letter="N">N</button>
-          <button class="key" data-letter="O">O</button>
-          <button class="key" data-letter="P">P</button>
-          <button class="key" data-letter="Q">Q</button>
-          <button class="key" data-letter="R">R</button>
-          <button class="key" data-letter="S">S</button>
-          <button class="key" data-letter="T">T</button>
-          <button class="key" data-letter="U">U</button>
-          <button class="key" data-letter="V">V</button>
-          <button class="key" data-letter="W">W</button>
-          <button class="key" data-letter="X">X</button>
-          <button class="key" data-letter="Y">Y</button>
-          <button class="key" data-letter="Z">Z</button>
-        </div>
-      </section>
+        <!-- === ABANDONNER === -->
+        <section class="quit">
+          <p class="quit-message">
+            💀 Tu peux fuir le combat, mais pas ton destin.
+          </p>
 
-      <section>
-        <div>
-          <p>🌑 Scelle ton destin… ou défie-le.</p>
-          <input
-            type="text"
-            id="proposition"
-            placeholder="Écris le mot secret"
-            autocomplete="off"
-          />
-          <button id="validateProposal">Valider</button>
-
-          <h3>📝 Mots proposés</h3>
-          <ul id="proposalList"></ul>
+          <button id="looser">Abandonner</button>
 
           <dialog id="quitGame">
             <p>
@@ -88,35 +151,14 @@
             <button id="confirmQuit">Je veux abandonner</button>
             <button id="cancelQuit">Je veux me relever</button>
           </dialog>
-        </div>
-      </section>
-
-      <section>
-        <h3>🏆 SCORES</h3>
-
-        <h4>🔥 MANCHE ACTUELLE</h4>
-
-        <ul id="scoreList">
-          <li class="scorePlayer"></li>
-          <li class="scorePlayer"></li>
-          <li class="scorePlayer"></li>
-          <li class="scoreTeam"></li>
-          <li class="scoreTeam"></li>
-        </ul>
-
-        <h4 id="gameScoreTitle" style="display: none">🏆 MANCHES GAGNEES</h4>
-
-        <ul id="gameScore" style="display: none"></ul>
-      </section>
-
-      <section>
-        <p>💀 Tu peux fuir le combat, mais pas ton destin.</p>
-        <button id="looser">Abandonner</button>
-      </section>
+        </section>
+      </div>
     </main>
 
     <footer>
-      <p>© 2026 — Le Destin du Guerrier</p>
+      <div class="container">
+        <p>© 2026 — Le Destin du Guerrier</p>
+      </div>
     </footer>
 
     <script src="game.js"></script>
