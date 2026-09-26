@@ -274,6 +274,8 @@ main p {
   border-radius: var(--corner);
   padding: 25px;
   text-align: center;
+  inset: 0;
+  margin: auto;
 }
 
 #quitGame button {
@@ -408,6 +410,20 @@ footer p {
     transform: translateY(-15px);
   }
 
+  #quitGame {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: calc(100% - 30px);
+    max-width: 320px;
+    max-height: calc(100% - 30px);
+    overflow-y: auto;
+  }
+
+  #quitGame button {
+    margin: 5px;
+  }
+
   .quit-message {
     text-align: left;
   }
@@ -420,28 +436,59 @@ footer p {
 /* === TABLETTE === */
 
 @media (min-width: 769px) and (max-width: 1189px) {
-  fieldset {
-    margin: 15px;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  main p {
-    font-size: 1.45rem;
-  }
-
-  legend {
-    font-size: 1.5rem;
-  }
-
   main {
     width: 100%;
     background-image:
       linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
       url("assets/image/background-mobile.png");
-
     padding-bottom: 40px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .game-layout {
+    flex-direction: column;
+  }
+
+  .game-left,
+  .game-center,
+  .game-right {
+    width: 100%;
+  }
+
+  .game-info {
+    margin-bottom: 30px;
+  }
+
+  .score {
+    margin-top: 15px;
+  }
+
+  .score-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .score-current,
+  .score-wins {
+    width: 40%;
+  }
+
+  #pendu {
+    width: 450px;
+  }
+
+  #keyboard {
+    max-width: 700px;
+    margin: 20px auto;
+    gap: 5px;
+  }
+
+  .wordSecret {
+    margin-top: 10px;
   }
 }
