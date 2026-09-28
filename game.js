@@ -446,6 +446,13 @@ proposalButton.addEventListener("click", () => {
   changePlayer();
 });
 
+proposalInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    proposalButton.click();
+  }
+});
+
 keys.forEach((key) => {
   key.addEventListener("click", () => {
     playLetter(key.dataset.letter);

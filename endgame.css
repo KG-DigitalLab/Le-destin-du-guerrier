@@ -1,3 +1,5 @@
+/* === POLICE === */
+
 @import url("https://fonts.googleapis.com/css2?family=Shojumaru&family=Teko:wght@300..700&display=swap");
 
 /* === VARIABLES === */
@@ -12,19 +14,31 @@
   --corner: 8px;
 }
 
-/* === STYLE PAR DEFAUT === */
+/* === RESET === */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* === RESET === */
+/* === STYLE PAR DEFAUT === */
+
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: "Teko", sans-serif;
-  background-color: var(--background-color);
+  font-size: 1.3rem;
+  line-height: 1.5;
   color: var(--text-color);
-  line-height: 1.7;
+  background-color: var(--background-color);
+}
+
+button {
+  font-family: "Shojumaru", cursive;
+  cursor: pointer;
+  border: none;
 }
 
 a {
@@ -32,15 +46,8 @@ a {
   color: var(--primary-color);
 }
 
-li {
-  list-style-type: none;
-}
-
-button {
-  border: none;
-}
-
 /* === CONTAINER === */
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -48,6 +55,7 @@ button {
 }
 
 /* === HEADER === */
+
 header {
   background-color: var(--background-color);
   border-bottom: 1px solid var(--border);
@@ -62,17 +70,19 @@ header .container {
 
 .logo {
   width: 100px;
+  height: auto;
 }
 
 /* === TITLE === */
 
 h1 {
   font-family: "Shojumaru", cursive;
+  font-size: 2.5rem;
   color: var(--title-color);
+  text-align: center;
   text-shadow:
     2px 3px 3px #000000,
     3px 4px 5px var(--primary-color);
-  font-size: 2.5rem;
 }
 
 h2 {
@@ -88,8 +98,17 @@ h2 {
     2px 2px 0 var(--primary-color);
 }
 
+h3,
+h4 {
+  color: var(--title-color);
+}
+
+/* === MAIN === */
+
 main {
-  min-height: 100vh;
+  flex: 1;
+  width: 100%;
+  padding: 30px 20px;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
     url("assets/image/background.png");
@@ -98,16 +117,216 @@ main {
   background-repeat: no-repeat;
 }
 
-main p {
-  font-size: 1.3rem;
-
-  text-shadow: 2px 3px 1px #000000;
-  margin: 10px;
+#end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  text-align: center;
 }
 
-#pendu {
-  width: 500px;
-  height: auto;
+.endgame-result {
+  width: 100%;
+}
+
+#result {
+  margin-bottom: 15px;
+}
+
+#penalty {
+  font-size: 1.5rem;
+}
+
+#final {
   display: block;
-  margin: 20px auto;
+  width: 700px;
+  max-width: 100%;
+  height: auto;
+  margin: 10px auto;
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+}
+
+#secret {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 3px #000000;
+}
+
+.endgame-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+button {
+  font-family: "Shojumaru", cursive;
+  color: var(--title-color);
+  text-shadow: 2px 2px 2px #000000;
+  display: block;
+  margin: 25px auto 0;
+  padding: 10px 30px;
+  background-color: var(--primary-color);
+  color: var(--title-color);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+#submitButton:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #8f1515;
+}
+
+/* === CHOIX DE DIFFICULTE === */
+
+#difficultyChoice {
+  width: 100%;
+  max-width: 500px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  background-color: rgba(11, 11, 11, 0.9);
+}
+
+legend {
+  padding: 0 10px;
+  font-family: "Shojumaru", cursive;
+  font-size: 1.3rem;
+  color: var(--title-color);
+}
+
+.difficulty-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.difficulty-option input {
+  accent-color: var(--primary-color);
+}
+
+/* === FOOTER === */
+
+footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  background-color: var(--background-color);
+  border-top: 1px solid var(--border);
+}
+
+/* === SMARTPHONE === */
+
+@media (max-width: 768px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  header .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  main {
+    width: 100%;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+      url("assets/image/background-mobile.png");
+
+    padding-bottom: 40px;
+  }
+
+  main h2 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  #penalty {
+    font-size: 1.2rem;
+  }
+
+  #final {
+    width: 100%;
+  }
+
+  .endgame-actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .endgame-actions button {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  fieldset {
+    padding: 15px;
+  }
+
+  .difficulty-option {
+    font-size: 1.2rem;
+  }
+}
+
+/* === TABLETTE === */
+
+@media (min-width: 769px) and (max-width: 1189px) {
+  main {
+    padding: 25px 20px;
+  }
+
+  #final {
+    width: 80%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
 }

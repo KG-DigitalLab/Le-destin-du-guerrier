@@ -7,43 +7,55 @@
     <link rel="stylesheet" href="endgame.css" />
     <title>Le Destin du Guerrier</title>
   </head>
+
   <body>
     <header>
       <div class="container">
-        <img class="logo" src="assets/image/logo.png" alt="logo" width="150" />
+        <img class="logo" src="assets/image/logo.png" alt="Logo" width="150" />
         <h1>LE DESTIN DU GUERRIER</h1>
       </div>
     </header>
+
     <main>
       <section id="end">
-        <h2 id="result"></h2>
-        <h3 id="penalty"></h3>
+        <div class="endgame-result">
+          <h2 id="result"></h2>
+          <h3 id="penalty"></h3>
+        </div>
+
         <img id="final" alt="Résultat de la partie" />
         <p id="secret"></p>
 
-        <div>
+        <div class="endgame-actions">
           <button id="replay">🔄 Rejouer</button>
           <button id="changeDifficulty">⚙️ Changer de voie</button>
           <button id="quit">🏠 Quitter</button>
-          <div id="difficultyChoice">
-            <fieldset>
-              <legend>⚔️ Choisis ta voie</legend>
+        </div>
 
+        <div id="difficultyChoice">
+          <fieldset>
+            <legend>⚔️ Choisis ta voie</legend>
+
+            <div class="difficulty-option">
               <input type="radio" id="guerrier" name="path" value="11" />
               <label for="guerrier">La voie du guerrier 🥷</label>
+            </div>
 
+            <div class="difficulty-option">
               <input type="radio" id="dragon" name="path" value="6" />
               <label for="dragon">La voie du dragon 🐉</label>
+            </div>
 
-              <button id="launchGame">Lancer la partie</button>
-            </fieldset>
-          </div>
+            <button id="launchGame">Lancer la partie</button>
+          </fieldset>
         </div>
       </section>
     </main>
+
     <footer>
       <p>© 2026 — Le Destin du Guerrier</p>
     </footer>
+
     <script src="endgame.js"></script>
   </body>
 </html>
