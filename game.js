@@ -1,14 +1,14 @@
 const number = JSON.parse(localStorage.getItem("number"));
-console.log(number);
+// console.log(number);
 
 const level = JSON.parse(localStorage.getItem("level"));
-console.log(level);
+// console.log(level);
 
 const player = JSON.parse(localStorage.getItem("player"));
-console.log(player);
+// console.log(player);
 
 const team = JSON.parse(localStorage.getItem("team"));
-console.log(team);
+// console.log(team);
 
 const nextPenalty = JSON.parse(localStorage.getItem("nextPenalty"));
 
@@ -176,7 +176,7 @@ function changePlayer() {
     }
   }
 
-  console.log("Nouveau joueur :", currentPlayer);
+  // console.log("Nouveau joueur :", currentPlayer);
   displayCurrentPlayer();
 }
 
@@ -303,8 +303,8 @@ const startGame = async () => {
 
   maskedWord = secretWord.split("").map(() => "-");
 
-  console.log(secretWord);
-  console.log(maskedWord.join(" "));
+  // console.log(secretWord);
+  // console.log(maskedWord.join(" "));
 
   document.querySelector("#word").textContent = maskedWord.join(" ");
 
