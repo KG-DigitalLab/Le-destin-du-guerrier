@@ -65,7 +65,10 @@ Tu viens d'en écrire la fin.`;
     penalizedNames = gameResult.penalized.map((index) => player[index]);
   }
 
-  if (penalizedNames.length === 1) {
+  if (number === "1") {
+    penalty.textContent =
+      "☠️ Le destin t’a vaincu cette fois, guerrier. Relève-toi et tente à nouveau ta chance !";
+  } else if (penalizedNames.length === 1) {
     penalty.textContent = `⚔️ ${penalizedNames[0]}, le destin réclame son dû. La prochaine bataille commencera avec un poids de -1 point.`;
   } else {
     penalty.textContent = `⚔️ ${penalizedNames.join(" et ")}, le destin réclame son dû. La prochaine bataille commencera avec un poids de -1 point.`;
